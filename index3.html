@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <body>  
+        <div id="root"></div>
+    </body>
+
+    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type = "text/babel">
+        const root = document.getElementById("root");
+
+        // index2.html에서 했던 리렌더링을
+        // 리액트가 도와줄 것이다.
+        // 아래는 리렌더링을 더 쉽게 하는 방법!
+
+
+        function App() {
+            // 아래 두줄이 리액트가 도와주는 것.
+            // [undefined, ƒ] 를 받음 -> undefined가 data라고 생각하면 됨.
+            // useState에 기본값을 주면 기본값으로 시작됨.
+            // [data, f]를 각각 [0],[1]로 호출하지 않고도 아래와 같이 설정 가능.
+            // const [a,6,c] = x; 
+            const [counter, setCounter] = React.useState(0);
+            const onClick = () => {
+                //setCounter(counter + 1);
+                //위 코드랑 같은 의미지만, 더 안전한 방법 (currnet가 현재상태 보장)
+                setCounter((current) => current + 1);
+            };
+            return(
+                <div>
+                    <h3> Total clicks: {counter}</h3>
+                    <button onClick={onClick}>Click me</button>
+                </div>
+            )
+            }
+
+        ReactDOM.render(<App />, root);
+    </script>
+</html>     
